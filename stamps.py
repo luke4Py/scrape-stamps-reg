@@ -9,6 +9,8 @@ from selenium.webdriver import Chrome
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
+import pandas as pd
+import pickle
 
 path = ("D:/SAMUEL/Softwares/chromedriver_win32/chromedriver.exe") #enter path to the chrome driver. (driver version should match your chrome version)
 url = 'https://registration.telangana.gov.in/stampStockPosition.htm'
@@ -16,7 +18,7 @@ url = 'https://registration.telangana.gov.in/stampStockPosition.htm'
 driver = Chrome(path) #, options = chrome_options)
 driver.get(url)
 
-xps = ['//*[@id="districtCode"]', '//*[@id="category"]', '//*[@id="denomination"]']
+xps = {'district' : '//*[@id="districtCode"]', 'category':'//*[@id="category"]', 'denomination' : '//*[@id="denomination"]'}
 output = {}
 
 for k in xps:
@@ -24,9 +26,14 @@ for k in xps:
     options = [i for i in x.find_elements_by_tag_name("option")]
     var = [element.get_attribute("text")  for element in options if element.get_attribute("text") != "Select..."]
     output[k] = var
-    
+
+
+data = {}
+
 for a in output['district']:
+    data[a] = {}
     for b in output['category']:
+        data[a].update({b:[]})
         for c in output['denomination']:
             # print(a)
             # print(b)
@@ -35,59 +42,97 @@ for a in output['district']:
             WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.XPATH,'//*[@id="category"]'))).send_keys(b)
             WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.XPATH,'//*[@id="denomination"]'))).send_keys(c)  
             WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.XPATH,'//*[@id="stampStockRegister"]/div[3]/button[1]'))).click()
+            xk = pd.read_html(driver.page_source)[0]
+            if '------------ No Stamp Stock Found------------' in xk.values:
+                data[a][b].append([c,'No Stamp Stock Found'])
+            else:
+                xk.columns = [xk.columns[i][0] for i in range(len(xk.columns))]
+                xk = xk.iloc[:-1,:-1]
+                xk.drop(['Sl.No'], axis = 1, inplace = True)
+                data[a][b].append([c,xk])
             driver.get(url)
-    
-    
-
-
-
 
 
 
 
 # =============================================================================
-# dump
+# 
 # =============================================================================
 
-# for a in output['district']:
-#     print("\n")
-#     for b in output['category']:
-#         print("\n")
-#         for c in output['denomination']:
-#             print(a)
-#             print(b)
-#             print(c)  
+with open("D:\SAMUEL\Ext Projects\Registrations_dept\dict_data.pickle", 'rb') as f:
+    data = pickle.load(f)
+
+data.pop('JAGTIAL')
+
+globals().update(data)
+
+who
+
+globals().update(HYDERABAD)
+
+"""
+
+
+
+
+xk = pd.read_html(driver.page_source)[0].columns
+xk.columns = [xk.columns[i][0] for i in range(len(xk.columns))]
+xk = xk.iloc[:-1,:-1]
+xk.drop(['Sl.No'], axis = 1, inplace = True)
+
+for i in range(len(xk.columns)):
+    print(xk.columns[i][0])
+
+(pd.read_html(driver.page_source)[0].columns).to_flat_index()
+
+xk.columns[]
+
+pd.read_html(driver.page_source)[0]
+
+
+
+
+pd.read_html(driver.page_source)[0]
+
+
+pd.DataFrame(pd.read_html(driver.page_source)[0])
+
+j = driver.find_element_by_xpath('//*[@id="wrapper1"]/div[2]/div[2]/table')
+
+
+from bs4 import BeautifulSoup as bs
+
+j = bs(driver.page_source,"html5lib")
+f = j.findAll('table', attrs = {'class':'table table-bordered table-responsive'})
+for i in f:
+    h.html = i
+
+
+
+for a in output['district']:
+    dat[a] = {}
+    for b in output['category']:
+        dat[a].update({b:[]})
+        for c in output['denomination']:
+            print(a)
+            print(b)
+            print(c)  
+            
+            
             
 
 
+for a in output['district']:
+    data[a] = {}
+    for b in output['category']:
+        data[a].update({b:[]})
+        # var =[]
+        for c in output['denomination']:
+            # var.append(c)            
+            data[a][b].append([c,"j"])
 
+"""
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+# =============================================================================
+# 
+# =============================================================================

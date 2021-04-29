@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+    # -*- coding: utf-8 -*-
 """
 Created on Wed Apr 28 17:29:27 2021
 
@@ -54,6 +54,17 @@ for a in output['district']:
 
 
 
+for m in data.keys():
+    for i in data[m]:
+        for j in data[m][i]:
+            try:
+                if 'No Stamp Stock Found' in j:
+                    pass
+            except ValueError:
+                # print(m+"_"+('_').join(i.split(" "))+"_"+str(j[0])+".csv")
+                j[1].to_csv(m+"_"+('_').join(i.split(" "))+"_"+str(j[0])+".csv", encoding = 'utf-8')
+                # print('\n')
+    
 
 # =============================================================================
 # 
@@ -64,11 +75,25 @@ with open("D:\SAMUEL\Ext Projects\Registrations_dept\dict_data.pickle", 'rb') as
 
 data.pop('JAGTIAL')
 
-globals().update(data)
 
-who
 
-globals().update(HYDERABAD)
+    
+    
+    
+globals().update(data['HYDERABAD']['COURT FEE LABLES'])
+
+x = %who DataFrame
+
+
+
+data["ADILABAD"]['A.P.Adv WELFARE FUND STAMPS']
+pd.DataFrame(data["ADILABAD"]['BROKER NOTE STAMPS'], columns = ['Denomination', 'Status'])
+
+
+data["HYDERABAD"]['A.P.Adv WELFARE FUND STAMPS']
+C = pd.DataFrame(data["HYDERABAD"]['A.P.Adv WELFARE FUND STAMPS'], columns = ['Denomination', 'Status'])
+
+
 
 """
 

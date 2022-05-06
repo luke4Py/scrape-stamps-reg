@@ -1,10 +1,3 @@
-    # -*- coding: utf-8 -*-
-"""
-Created on Wed Apr 28 17:29:27 2021
-
-@author: Luke Samuel
-"""
-
 from selenium.webdriver import Chrome
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -12,7 +5,7 @@ from selenium.webdriver.common.by import By
 import pandas as pd
 import pickle
 
-path = ("D:/SAMUEL/Softwares/chromedriver_win32/chromedriver.exe") #enter path to the chrome driver. (driver version should match your chrome version)
+path = ("your_path") #enter path to the chrome driver. (driver version should match your chrome version)
 url = 'https://registration.telangana.gov.in/stampStockPosition.htm'
 
 driver = Chrome(path) #, options = chrome_options)
@@ -70,15 +63,14 @@ for m in data.keys():
 # 
 # =============================================================================
 
-with open("D:\SAMUEL\Ext Projects\Registrations_dept\dict_data.pickle", 'rb') as f:
+
+"""
+
+
+with open("your_path\dict_data.pickle", 'rb') as f:
     data = pickle.load(f)
 
-data.pop('JAGTIAL')
-
-
-
-    
-    
+data.pop('JAGTIAL')    
     
 globals().update(data['HYDERABAD']['COURT FEE LABLES'])
 
@@ -93,9 +85,6 @@ pd.DataFrame(data["ADILABAD"]['BROKER NOTE STAMPS'], columns = ['Denomination', 
 data["HYDERABAD"]['A.P.Adv WELFARE FUND STAMPS']
 C = pd.DataFrame(data["HYDERABAD"]['A.P.Adv WELFARE FUND STAMPS'], columns = ['Denomination', 'Status'])
 
-
-
-"""
 
 
 

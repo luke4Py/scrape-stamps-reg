@@ -3,6 +3,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 import pandas as pd
+
 import os 
 import getpass
 import pathlib
@@ -23,6 +24,7 @@ def entry():
     url = 'https://registration.telangana.gov.in/stampStockPosition.htm'
     driver = Chrome(path) # , options = chrome_options)
     driver.get(url)
+
     
 
 def options():
@@ -77,11 +79,14 @@ output = options()
 data = scraping(output)
 
 
+"""
 
 # =============================================================================
 # dump
 # =============================================================================
 
+with open("your_path\dict_data.pickle", 'rb') as f:
+    data = pickle.load(f)
 
 # def local_save(data):
 #     folder = "C:" + os.path.sep + "Users"+ os.path.sep + getpass.getuser() + os.path.sep + "Desktop"+ os.path.sep+ "Stamp_stocks" 
@@ -98,11 +103,4 @@ data = scraping(output)
 #                     # print('\n')
 #     print("DataFrames are Locally Saved in your current working directory")
     
-
-
-
-
-
-
-
-    
+"""

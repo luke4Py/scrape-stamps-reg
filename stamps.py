@@ -1,10 +1,3 @@
-    # -*- coding: utf-8 -*-
-"""
-Created on Wed Apr 28 17:29:27 2021
-
-@author: Luke Samuel
-"""
-
 from selenium.webdriver import Chrome
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -26,7 +19,7 @@ def entry():
     folder = "C:" + os.path.sep + "Users"+ os.path.sep + getpass.getuser() + os.path.sep + "Desktop"+ os.path.sep+ "Stamp_stocks" 
     pathlib.Path(folder).mkdir(parents=True, exist_ok=True)
     os.chdir(folder)
-    path = ("D:/SAMUEL/Softwares/chromedriver_win32/chromedriver.exe") #enter path to the chrome driver. (driver version should match your chrome version)
+    path = ("enter path to the chrome driver. (driver version should match your chrome version)") 
     url = 'https://registration.telangana.gov.in/stampStockPosition.htm'
     driver = Chrome(path) # , options = chrome_options)
     driver.get(url)

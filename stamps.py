@@ -87,6 +87,7 @@ data = scraping(output)
 
 with open("your_path\dict_data.pickle", 'rb') as f:
     data = pickle.load(f)
+print(data)
 
 # def local_save(data):
 #     folder = "C:" + os.path.sep + "Users"+ os.path.sep + getpass.getuser() + os.path.sep + "Desktop"+ os.path.sep+ "Stamp_stocks" 

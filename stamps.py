@@ -2,16 +2,15 @@ from selenium.webdriver import Chrome
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.options import Options
 import pandas as pd
-
 import os 
 import getpass
 import pathlib
-from selenium.webdriver.chrome.options import Options
+import sys 
+import pickle
 chrome_options = Options()
 chrome_options.add_argument("--headless")
-import sys 
-
 
 def entry():
     global driver
@@ -78,6 +77,8 @@ entry()
 output = options()
 data = scraping(output)
 
+with open(r"stampstock_data.pickle", "wb") as output_file:
+    pickle.dump(data, output_file)
 
 """
 
